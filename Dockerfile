@@ -5,4 +5,5 @@ RUN unzip /tmp/smartylist.zip smartylist -d /bin
 RUN rm /tmp/smartylist.zip
 RUN smartylist -version
 RUN apk --purge del curl unzip
+WORKDIR /tmp/share
 CMD smartylist --help
