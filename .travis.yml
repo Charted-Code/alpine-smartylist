@@ -5,10 +5,11 @@ services:
 before_install:
   - docker build -t chartedcode/alpine-smartylist .
   - export VERSION=$(docker run -i --rm chartedcode/alpine-smartylist smartylist -version)
+  - echo $VERSION
 
 script:
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
-  - git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER" \
-    && git push --quiet https://$GITHUBKEY@github.com/charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1 \
+  - git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER" > /dev/null 2>&1
+    && git push --quiet https://$GITHUBKEY@github.com/charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1
     || true; echo no change
