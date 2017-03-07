@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t chartedcode/alpine-smartylist .
+  - export VERSION=$(docker run -i --rm chartedcode/alpine-smartylist smartylist -version)
+
+script:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - echo -n $VERSION > version
+  - git commit -m "Updated to $VERSION" version
+  - git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push --quiet https://$GITHUBKEY@github.com:charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1
+  
