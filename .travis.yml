@@ -11,4 +11,6 @@ script:
   - git config --global user.name "Travis CI"
   - if git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"; then
       git push --quiet https://$GITHUBKEY@github.com/charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1
+    else
+      echo no change
     fi
