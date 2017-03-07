@@ -12,5 +12,4 @@ script:
   - echo -n $VERSION > version
   - git commit -m "Updated to $VERSION" version
   - git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
-  - git push --quiet https://$GITHUBKEY@github.com:charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1
-  
+  - git push --quiet https://$GITHUBKEY@github.com/charted-code/alpine-smartylist.git $VERSION > /dev/null 2>&1
