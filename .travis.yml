@@ -2,12 +2,10 @@ sudo: required
 services:
   - docker
 
-before_install:
+script:
   - docker build -t chartedcode/alpine-smartylist .
   - export VERSION=$(docker run -i --rm chartedcode/alpine-smartylist smartylist -version)
   - echo $VERSION
-
-script:
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
   - git tag $VERSION -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER" > /dev/null 2>&1
